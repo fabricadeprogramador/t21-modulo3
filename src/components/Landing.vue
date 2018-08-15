@@ -2,7 +2,7 @@
   <div>
     <v-container fluid fill-height>
       <v-layout justify-center align-center>
-        LANDING
+        <img src="http://fabricadeprogramador.com.br/img/logo-menu-lateral.svg" alt="Bem-vindo">
       </v-layout>
     </v-container>
 

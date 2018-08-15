@@ -15,7 +15,7 @@
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          
+
           <v-list-tile :to="{ name : 'Produtos' }">
             <v-list-tile-action>
               <v-icon>list</v-icon>
@@ -26,7 +26,9 @@
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
+
         </v-list>
+
       </v-navigation-drawer>
 
 
@@ -37,8 +39,10 @@
 
       <v-content>
         <v-container fluid fill-height>
-          <v-layout >
-            <router-view></router-view>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <router-view></router-view>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-content>
