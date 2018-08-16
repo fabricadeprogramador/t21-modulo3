@@ -8,8 +8,17 @@ export default{
         .then(response => response.json())
     },
 
+    deletarProduto(produto){
+        console.log("Produto a excluir: " + produto);
+        
+        return axios.delete(API_URL, { data: produto })
+        .then(response => response.data)
+    },
+    
     adicionarProduto(produto){
-        axios.post(API_URL, produto)
-        .then( produto => response.json(produto))
+        return axios.post(API_URL, produto)
+        .then(response => response.data)
     }
+
+    
 };
