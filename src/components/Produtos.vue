@@ -20,7 +20,7 @@
       <template slot="items" slot-scope="props">
         <td>{{ props.item.nome }}</td>
         <td class="text-xs-left">{{ props.item.descricao }}</td>
-        <td class="text-xs-left">{{ props.item.valor }}</td>
+        <td class="text-xs-left">R$ {{ (props.item.valor).toFixed(2) }}</td>
         <td class="text-xs-left">
           <img style="width:80px;height:80px;overflow:hidden" :src="props.item.foto">
         </td>
@@ -28,27 +28,27 @@
           <v-flex>
 
             <!-- <v-layout row justify-center>
-              <v-dialog v-model="dialog" persistent max-width="290">
-                <v-btn slot="activator" flat icon color="red">
-                  <v-icon>delete</v-icon>
-                </v-btn>
-                <v-card>
-                  <v-card-title class="headline">Shopping HT:</v-card-title>
-                  <v-card-text>Tem certeza que deseja excluir este produto {{ props.index }}?</v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="red darken-1" flat @click="confirmarExclusao(false, props.item)">Não</v-btn>
-                    <v-btn color="green darken-1" flat @click="confirmarExclusao(true, props.item)">Sim</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-layout> -->
+                  <v-dialog v-model="dialog" persistent max-width="290">
+                    <v-btn slot="activator" flat icon color="red">
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                    <v-card>
+                      <v-card-title class="headline">Shopping HT:</v-card-title>
+                      <v-card-text>Tem certeza que deseja excluir este produto {{ props.index }}?</v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="red darken-1" flat @click="confirmarExclusao(false, props.item)">Não</v-btn>
+                        <v-btn color="green darken-1" flat @click="confirmarExclusao(true, props.item)">Sim</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-layout> -->
 
             <v-btn flat icon color="red">
               <v-icon @click="deletarProduto(props.item)">delete</v-icon>
             </v-btn>
             <v-btn flat icon color="blue">
-              <v-icon>edit</v-icon>
+              <v-icon @click="editarProduto(props.item)">edit</v-icon>
             </v-btn>
           </v-flex>
         </td>
@@ -77,13 +77,24 @@
 
       submit() {
 
-        if (this.$refs.form.validate()) {
-          API.adicionarProduto(this.produto)
-            .then(response => {
-              this.clear()
-              this.load()
-            });
+        if (this.produto._id == null) {
+          if (this.$refs.form.validate()) {
+            API.adicionarProduto(this.produto)
+              .then(response => {
+                this.clear()
+                this.load()
+              });
+          }
+        } else {
+          if (this.$refs.form.validate()) {
+            API.editarProduto(this.produto)
+              .then(response => {
+                this.clear()
+                this.load()
+              });
+          }
         }
+
       },
 
       clear() {
@@ -104,10 +115,15 @@
           });
       },
 
+      editarProduto(produto) {
+        this.produto = produto;
+        this.mostrarForm = true;
+      },
+
       confirmarExclusao(flag, produto) {
         console.log(flag);
         console.log(produto);
-        
+
         if (flag) {
           this.deletarProduto(produto);
         }

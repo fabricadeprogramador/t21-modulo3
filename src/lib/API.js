@@ -18,7 +18,10 @@ export default{
     adicionarProduto(produto){
         return axios.post(API_URL, produto)
         .then(response => response.data)
-    }
+    },
 
-    
+    editarProduto(produto){
+        return axios.put(API_URL, produto)
+        .then(response => response.data)
+    }
 };
