@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Landing from '@/components/Landing'
 import Produtos from '@/components/Produtos'
+import Clientes from '@/components/Clientes'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/produtos',
       name: 'Produtos',
       component: Produtos
+    },
+    {
+      path: '/clientes',
+      name: 'Clientes',
+      component: Clientes
     }
   ]
 })
