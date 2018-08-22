@@ -45,7 +45,7 @@
 
       <v-toolbar color="indigo" dark fixed app>
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Shopping HT</v-toolbar-title>
+        <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
       </v-toolbar>
 
       <v-content>
