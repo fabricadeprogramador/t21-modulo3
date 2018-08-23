@@ -38,6 +38,17 @@
             </v-list-tile-content>
           </v-list-tile>
 
+          <v-list-tile :to="{ name : 'Financeiro' }">
+            <v-list-tile-action>
+              <v-icon>attach_money</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Financeiro
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
         </v-list>
 
       </v-navigation-drawer>
@@ -66,16 +77,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'App',
-    data: () => ({
-      drawer: true
-    })
-  }
-
+export default {
+  name: "App",
+  data: () => ({
+    drawer: true
+  })
+};
 </script>
 
 <style>
-
-
 </style>
