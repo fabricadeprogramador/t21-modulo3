@@ -34,7 +34,12 @@
           <template slot="items" slot-scope="props">
             <td>{{ props.item.cliente.nome }}</td>
             <td class="text-xs-left">{{ props.item.estabelecimento.nome }}</td>
-            <td class="text-xs-left">R$ {{ props.item.valor }}</td>
+            <td class="text-xs-left">{{ props.item.valor |
+              currency("R$", "2", {
+                thousandsSeparator: ".",
+                decimalSeparator: ",",
+                spaceBetweenAmountAndSymbol: true
+              }) }}</td>
             <td class="text-xs-left">{{ props.item.data }}</td>
             <td>
               <v-btn flat title="Detalhes da compra">
@@ -51,19 +56,34 @@
         <v-toolbar
             slot="footer"
             color="white">
-            <span style="font-size: 18px;">Receitas: R${{ receitas }}</span>
+            <span style="font-size: 18px;">Receitas: {{ receitas |
+              currency("R$", "2", {
+                thousandsSeparator: ".",
+                decimalSeparator: ",",
+                spaceBetweenAmountAndSymbol: true
+              }) }}</span>
           </v-toolbar>
 
         <v-toolbar
           slot="footer"
           color="white">
-          <span style="font-size: 18px;">Despesas: R${{ despesa }}</span>
+          <span style="font-size: 18px;">Despesas: {{ despesa |
+            currency("R$", "2", {
+                thousandsSeparator: ".",
+                decimalSeparator: ",",
+                spaceBetweenAmountAndSymbol: true
+              }) }}</span>
         </v-toolbar>
 
         <v-toolbar
           slot="footer"
           color="white">
-          <span style="font-size: 20px; font-weight: 600;">Saldo: R${{ saldo }}</span>
+          <span style="font-size: 20px; font-weight: 600;">Saldo: {{ saldo |
+            currency("R$", "2", {
+                thousandsSeparator: ".",
+                decimalSeparator: ",",
+                spaceBetweenAmountAndSymbol: true
+              }) }}</span>
           <v-alert
             class="text-xs  -left"
             :value="saldo < 0"
@@ -81,6 +101,7 @@
 
 <script>
 import API from "../lib/API.js";
+import DateFormatte from "../utils/DateFormatte.js";
 
 export default {
   data() {
@@ -156,22 +177,23 @@ export default {
       for (let c of this.compras) {
         this.receitas += c.valor;
       }
+    },
+
+    formatarData() {
+      for (let i = 0; i < this.compras.length; i++) {
+        this.compras[i].data = DateFormatte.getDateFormatter(
+          this.compras[i].data
+        );
+      }
     }
   },
 
   beforeMount() {
     API.getCompras().then(response => {
       this.compras = response;
+      this.formatarData();
       this.calcularSaldo();
     });
-  },
-
-  mounted() {
-    //this.calcularReceitas();
-  },
-
-  beforeDestroy() {
-    //this.calcularReceitas();
   }
 };
 </script>
