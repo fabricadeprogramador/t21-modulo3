@@ -36,39 +36,44 @@
             </v-card-title>
 
             <v-card-text>
-                <div>
+              <v-layout row justify-center>
+                <v-flex xs8>
+                  <div style="padding:20px; text-align:center">
                     <img :src="clienteSelecionado.foto" height="150px">
-                </div>
-                <div>
+                  </div>
+                  <div>
                     <div>
-                        <label for="nome">Nome: </label>
-                        <span id="nome">{{ clienteSelecionado.nome }}</span>
+                      <label for="nome">Nome: </label>
+                      <span id="nome">{{ clienteSelecionado.nome }}</span>
                     </div>
-                      <div>
-                        <label for="cpfCnpj">CPF/CNPJ: </label>
-                        <span id="cpfCnpj">{{ clienteSelecionado.cpfCnpj }}</span>
+                    <div>
+                      <label for="cpfCnpj">CPF/CNPJ: </label>
+                      <span id="cpfCnpj">{{ clienteSelecionado.cpfCnpj }}</span>
                     </div>
-                      <div>
-                        <label for="pf">Pessoa Física? : </label>
-                        <span id="pf">{{ clienteSelecionado.pf ? 'Sim' : 'Não' }}</span>
+                    <div>
+                      <label for="pf">Pessoa Física? : </label>
+                      <span id="pf">{{ clienteSelecionado.pf ? 'Sim' : 'Não' }}</span>
                     </div>
-                      <div>
-                        <label for="endereco">Endereço: </label>
-                        <span id="endereco">{{ clienteSelecionado.endereco }}</span>
+                    <div>
+                      <label for="endereco">Endereço: </label>
+                      <span id="endereco">{{ clienteSelecionado.endereco }}</span>
                     </div>
-                      <div>
-                        <label for="telefone">Telefone: </label>
-                        <span id="telefone">{{ clienteSelecionado.telefone }}</span>
+                    <div>
+                      <label for="telefone">Telefone: </label>
+                      <span id="telefone">{{ clienteSelecionado.telefone }}</span>
                     </div>
-                      <div>
-                        <label for="email">E-mail: </label>
-                        <span id="email">{{ clienteSelecionado.email }}</span>
+                    <div>
+                      <label for="email">E-mail: </label>
+                      <span id="email">{{ clienteSelecionado.email }}</span>
                     </div>
-                      <div>
-                        <label for="dataNasc">Data de Nascimento: </label>
-                        <span id="dataNasc">{{ clienteSelecionado.dataNasc }}</span>
+                    <div>
+                      <label for="dataNasc">Data de Nascimento: </label>
+                      <span id="dataNasc">{{ clienteSelecionado.dataNasc }}</span>
                     </div>
-                </div>
+                  </div>
+
+                </v-flex>
+              </v-layout>
             </v-card-text>
 
           </v-card>
@@ -111,6 +116,8 @@
 </script>
 
 <style>
-
+label{
+  font-weight: 500
+}
 
 </style>

@@ -9,6 +9,7 @@ import VueFilterDateFormat from 'vue-filter-date-format'
 
 import App from './App'
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -20,6 +21,7 @@ Vue.use(VueFilterDateFormat)
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },

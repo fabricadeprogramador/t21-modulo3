@@ -4,13 +4,15 @@ import Landing from '@/components/Landing'
 import Produtos from '@/components/Produtos'
 import Clientes from '@/components/Clientes'
 import Financeiro from '@/components/Financeiro'
+import Estabelecimentos from '@/components/Estabelecimentos'
+import Usuarios from '@/components/Usuarios'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
       path: '/',
-      name: 'Landing',
+      name: 'Home',
       component: Landing
     },
     {
@@ -27,6 +29,16 @@ export default new Router({
       path: '/financeiro',
       name: 'Financeiro',
       component: Financeiro
+    },
+    {
+      path: '/estabelecimentos',
+      name: 'Estabelecimentos',
+      component: Estabelecimentos
+    },
+    {
+      path: '/usuarios',
+      name: 'Usuarios',
+      component: Usuarios
     }
   ]
 })

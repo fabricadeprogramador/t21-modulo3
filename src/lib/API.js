@@ -11,7 +11,6 @@ export default {
   },
 
   deletarProduto(produto) {
-    console.log("Produto a excluir: " + produto);
 
     return axios.delete(API_URL + "produtos", {
         data: produto
@@ -41,6 +40,7 @@ export default {
       .then(response => response.json());
   },
 
+  //FINANCEIRO
   salvarDespesa(despesa) {
     return axios.post(API_URL + "financeiro", despesa)
       .then(response => response.data)
@@ -49,5 +49,54 @@ export default {
   getDespesa() {
     return fetch(API_URL + "financeiro")
       .then(response => response.json());
-  }
+  },
+
+  // ESTABELECIMENTOS
+  getEstabelecimentos() {
+    return fetch(API_URL + "estabelecimento")
+      .then(response => response.json());
+  },
+
+  adicionarEstabelecimento(estabelecimento) {
+    return axios.post(API_URL + "estabelecimento", estabelecimento)
+      .then(response => response.data)
+  },
+
+  deletarEstabelecimento(estabelecimento) {
+
+    return axios.delete(API_URL + "estabelecimento", {
+        data: estabelecimento
+      })
+      .then(response => response.data)
+  },
+
+  editarEstabelecimento(estabelecimento) {
+    return axios.put(API_URL + "estabelecimento", estabelecimento)
+      .then(response => response.data)
+  },
+
+  //USUÁRIOS
+  getUsuarios() {
+    return fetch(API_URL + "usuarios")
+      .then(response => response.json())
+  },
+
+  adicionarUsuario(usuario) {
+    return axios.post(API_URL + "usuarios", usuario)
+      .then(response => response.data)
+  },
+
+  editarUsuario(usuario) {
+    return axios.put(API_URL + "usuarios", usuario)
+      .then(response => response.data)
+  },
+
+  deletarUsuario(usuario) {
+
+    return axios.delete(API_URL + "usuarios", {
+        data: usuario
+      })
+      .then(response => response.data)
+  },
+
 };
