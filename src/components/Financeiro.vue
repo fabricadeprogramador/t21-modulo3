@@ -15,7 +15,7 @@
 
             <form v-if="!exibir">
               <v-text-field
-                v-model="despesaInformada"
+                v-model="despesa"
                 label="Valor">
               </v-text-field>
               <v-btn @click="salvar()">Salvar</v-btn>
@@ -159,7 +159,10 @@ export default {
     },
 
     salvar() {
-      this.despesa = this.despesaInformada;
+      API.salvarDespesa(this.despesa).then(response => {
+        console.log("Despesa salva com sucesso");
+      });
+
       this.calcularSaldo();
       this.exibirBotaoAdd();
     },
@@ -193,6 +196,10 @@ export default {
       this.compras = response;
       this.formatarData();
       this.calcularSaldo();
+    });
+
+    API.getDespesa().then(response => {
+      this.despesa = response.despesa;
     });
   }
 };

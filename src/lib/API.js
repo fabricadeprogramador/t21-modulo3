@@ -39,5 +39,15 @@ export default {
   getCompras() {
     return fetch(API_URL + "compras")
       .then(response => response.json());
+  },
+
+  salvarDespesa(despesa) {
+    return axios.post(API_URL + "financeiro", despesa)
+      .then(response => response.data)
+  },
+
+  getDespesa() {
+    return fetch(API_URL + "financeiro")
+      .then(response => response.json());
   }
 };
