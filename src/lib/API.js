@@ -40,6 +40,17 @@ export default {
       .then(response => response.json());
   },
 
+  //FINANCEIRO
+  salvarDespesa(despesa) {
+    return axios.post(API_URL + "financeiro", despesa)
+      .then(response => response.data)
+  },
+
+  getDespesa() {
+    return fetch(API_URL + "financeiro")
+      .then(response => response.json());
+  },
+
   // ESTABELECIMENTOS
   getEstabelecimentos() {
     return fetch(API_URL + "estabelecimento")
@@ -52,7 +63,7 @@ export default {
   },
 
   deletarEstabelecimento(estabelecimento) {
-    
+
     return axios.delete(API_URL + "estabelecimento", {
         data: estabelecimento
       })
@@ -65,7 +76,6 @@ export default {
   },
 
   //USUÁRIOS
-
   getUsuarios() {
     return fetch(API_URL + "usuarios")
       .then(response => response.json())
@@ -82,7 +92,7 @@ export default {
   },
 
   deletarUsuario(usuario) {
-    
+
     return axios.delete(API_URL + "usuarios", {
         data: usuario
       })

@@ -3,13 +3,14 @@
     <v-layout>
 
       <v-flex xs2>
+
         <v-btn v-if="exibir" @click="exibirBotaoAdd()" dark title="Adicionar despesa" color="blue">
           <v-icon>add</v-icon>
           Adicionar despesa
         </v-btn>
 
         <form v-if="!exibir">
-          <v-text-field v-model="despesaInformada" label="Valor">
+          <v-text-field v-model="despesa" label="Valor">
           </v-text-field>
           <v-btn @click="salvar()">Salvar</v-btn>
           <v-btn @click="exibirBotaoAdd()">Cancelar</v-btn>
@@ -137,7 +138,10 @@
       },
 
       salvar() {
-        this.despesa = this.despesaInformada;
+        API.salvarDespesa(this.despesa).then(response => {
+          console.log("Despesa salva com sucesso");
+        });
+
         this.calcularSaldo();
         this.exibirBotaoAdd();
       },
@@ -171,6 +175,10 @@
         this.compras = response;
         this.formatarData();
         this.calcularSaldo();
+      });
+
+      API.getDespesa().then(response => {
+        this.despesa = response.despesa;
       });
     }
   };
