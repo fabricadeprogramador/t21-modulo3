@@ -20,7 +20,7 @@
                 <!-- <v-icon :color="estabelecimento.active ? 'teal' : 'grey'">chat_bubble</v-icon> -->
                 <v-flex xs12>
                   <v-btn flat icon color="red">
-                    <v-icon @click="deletarEstabelecimento(estabelecimento)">delete</v-icon>
+                    <v-icon @click="confirmarExclusao(estabelecimento)">delete</v-icon>
                   </v-btn>
                   <v-btn flat icon color="blue">
                     <v-icon @click="editarEstabelecimento(estabelecimento)">edit</v-icon>
@@ -101,6 +101,34 @@
       </v-dialog>
     </div>
 
+    <!-- Confirm Dialog -->
+    <div>
+      <v-dialog v-model="mostrarConfirm" width="500">
+
+        <v-card>
+          <v-card-title class="headline grey lighten-2" primary-title>
+            Confirmar Exclusão
+          </v-card-title>
+
+          <v-card-text>
+            Tem certeza que deseja excluir esse usuário?
+          </v-card-text>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" flat @click="deletarEstabelecimento()">
+              Sim
+            </v-btn>
+            <v-btn color="primary" flat @click="cancelarExclusao()">
+              Não
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </div>
+
   </div>
 
 </template>
@@ -144,8 +172,8 @@
         this.fecharForm();
       },
 
-      deletarEstabelecimento(estabelecimento) {
-        API.deletarEstabelecimento(estabelecimento)
+      deletarEstabelecimento() {
+        API.deletarEstabelecimento(this.estabelecimentoDeletar)
           .then(response => {
             if (response == null) {
               this.alerta("Erro ao remover estabelecimento!", "error");
@@ -153,7 +181,20 @@
               this.alerta("Estabelecimento removido com Sucesso!", "success");
               this.load();
             }
+
+            this.estabelecimentoDeletar = {}
+            this.mostrarConfirm = false;
           })
+      },
+
+      cancelarExclusao() {
+        this.estabelecimentoDeletar = {}
+        this.mostrarConfirm = false;
+      },
+
+      confirmarExclusao(estabelecimento) {
+        this.mostrarConfirm = true;
+        this.estabelecimentoDeletar = estabelecimento;
       },
 
       editarEstabelecimento(estabelecimento) {
@@ -208,12 +249,12 @@
 
       },
 
-      removerProduto(produto){
-          for(let i = 0; i < this.estabelecimento.produtos.length; i++){
-            if(this.estabelecimento.produtos[i].nome == produto.nome){
-              this.estabelecimento.produtos.splice(i,1);
-            }
+      removerProduto(produto) {
+        for (let i = 0; i < this.estabelecimento.produtos.length; i++) {
+          if (this.estabelecimento.produtos[i].nome == produto.nome) {
+            this.estabelecimento.produtos.splice(i, 1);
           }
+        }
       },
 
       novo() {
@@ -257,7 +298,9 @@
         estabelecimento: {},
         produtos: [],
         produtoSelecionado: {},
-        mostrarForm: false
+        mostrarForm: false,
+        mostrarConfirm: false,
+        estabelecimentoDeletar: {}
       }
     }
   }
