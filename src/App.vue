@@ -5,7 +5,7 @@
       <v-navigation-drawer v-model="drawer" fixed app>
         <v-list dense>
 
-          <v-list-tile :to="{ name : 'Landing' }">
+          <v-list-tile :to="{ name : 'Home' }">
             <v-list-tile-action>
               <v-icon>home</v-icon>
             </v-list-tile-action>
@@ -49,6 +49,28 @@
             </v-list-tile-content>
           </v-list-tile>
 
+          <v-list-tile :to="{ name : 'Estabelecimentos' }">
+            <v-list-tile-action>
+              <v-icon>shop</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Estabelecimentos
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
+           <v-list-tile :to="{ name : 'Usuarios' }">
+            <v-list-tile-action>
+              <v-icon>person</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                Usuários
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
         </v-list>
 
       </v-navigation-drawer>
@@ -63,7 +85,14 @@
         <v-container fluid fill-height>
           <v-layout row wrap>
             <v-flex xs12>
-              <router-view></router-view>
+
+              <!-- Alert -->
+              <v-alert :value=mensagem.value :type=mensagem.type>
+                {{ mensagem.msg }}
+                  <v-icon @click="fecharMsg" style="float:right">close</v-icon>
+              </v-alert>
+
+                <router-view></router-view>
             </v-flex>
           </v-layout>
         </v-container>
@@ -77,12 +106,33 @@
 </template>
 
 <script>
-export default {
-  name: "App",
-  data: () => ({
-    drawer: true
-  })
-};
+  import {
+    mapState,
+    mapMutations
+  } from 'vuex'
+  export default {
+    name: "App",
+    computed: {
+      ...mapState([
+        'mensagem'
+      ])
+    },
+    data: () => ({
+      drawer: false
+    }),
+    methods:{
+      fecharMsg(){
+        let msgObj = {
+            msg : "",
+            type : "success",
+            value : false
+        };
+
+        this.$store.commit('CHANGE_MSG', msgObj);
+      }
+    }
+  };
+
 </script>
 
 <style>
